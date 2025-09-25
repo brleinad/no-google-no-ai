@@ -1,8 +1,8 @@
 
-# Implementation Plan: [FEATURE]
+# Implementation Plan: Google Query Wrapper
 
-**Branch**: `[###-feature-name]` | **Date**: [DATE] | **Spec**: [link]
-**Input**: Feature specification from `/specs/[###-feature-name]/spec.md`
+**Branch**: `001-build-a-simple` | **Date**: 2025-09-25 | **Spec**: [spec.md](./spec.md)
+**Input**: Feature specification from `/Users/danielrb/sandbox/no-google-no-ai/specs/001-build-a-simple/spec.md`
 
 ## Execution Flow (/plan command scope)
 ```
@@ -31,45 +31,45 @@
 - Phase 3-4: Implementation execution (manual or via tools)
 
 ## Summary
-[Extract from feature spec: primary requirement + technical approach from research]
+Simple static web app that provides a search input field, automatically appends "-ai" to user queries, and redirects to Google search to avoid AI-generated summaries. Built as vanilla HTML/CSS/JavaScript for seamless CDN deployment.
 
 ## Technical Context
-**Language/Version**: [e.g., Python 3.11, Swift 5.9, Rust 1.75 or NEEDS CLARIFICATION]  
-**Primary Dependencies**: [e.g., FastAPI, UIKit, LLVM or NEEDS CLARIFICATION]  
-**Storage**: [if applicable, e.g., PostgreSQL, CoreData, files or N/A]  
-**Testing**: [e.g., pytest, XCTest, cargo test or NEEDS CLARIFICATION]  
-**Target Platform**: [e.g., Linux server, iOS 15+, WASM or NEEDS CLARIFICATION]
-**Project Type**: [single/web/mobile - determines source structure]  
-**Performance Goals**: [domain-specific, e.g., 1000 req/s, 10k lines/sec, 60 fps or NEEDS CLARIFICATION]  
-**Constraints**: [domain-specific, e.g., <200ms p95, <100MB memory, offline-capable or NEEDS CLARIFICATION]  
-**Scale/Scope**: [domain-specific, e.g., 10k users, 1M LOC, 50 screens or NEEDS CLARIFICATION]
+**Language/Version**: HTML5, ES2018+ JavaScript, CSS3
+**Primary Dependencies**: None (vanilla web technologies only)
+**Storage**: N/A (stateless static site)
+**Testing**: Manual browser testing, W3C HTML validation
+**Target Platform**: Modern web browsers (Chrome, Firefox, Safari)
+**Project Type**: single (static website)
+**Performance Goals**: <2 seconds load time on 3G, immediate redirect on search
+**Constraints**: No build tools, no frameworks, CDN-ready, Netlify deployment
+**Scale/Scope**: Single-page app with search form, minimal footprint
 
 ## Constitution Check
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
 **Static-First Compliance**:
-- [ ] No server-side processing, databases, or dynamic content generation
-- [ ] All content pre-built and self-contained
-- [ ] HTML, CSS, JavaScript, and assets servable directly from CDN
+- [x] No server-side processing, databases, or dynamic content generation
+- [x] All content pre-built and self-contained
+- [x] HTML, CSS, JavaScript, and assets servable directly from CDN
 
 **CDN-Ready Compliance**:
-- [ ] All paths relative or absolute (no localhost dependencies)
-- [ ] Assets optimized for CDN delivery (minified CSS/JS, compressed images)
-- [ ] Proper caching headers via meta tags
+- [x] All paths relative or absolute (no localhost dependencies)
+- [x] Assets optimized for CDN delivery (minified CSS/JS, compressed images)
+- [x] Proper caching headers via meta tags
 
 **Minimal Dependencies Compliance**:
-- [ ] Vanilla HTML/CSS/JS preferred over frameworks
-- [ ] Libraries use CDN-hosted versions or single-file includes
-- [ ] No build tools unless absolutely required
+- [x] Vanilla HTML/CSS/JS preferred over frameworks
+- [x] Libraries use CDN-hosted versions or single-file includes
+- [x] No build tools unless absolutely required
 
 **Performance-First Compliance**:
-- [ ] Pages load in under 2 seconds on 3G
-- [ ] Images optimized, CSS/JS minified
-- [ ] Minimal HTTP requests, no heavy libraries
+- [x] Pages load in under 2 seconds on 3G
+- [x] Images optimized, CSS/JS minified
+- [x] Minimal HTTP requests, no heavy libraries
 
 **Simple Deployment Compliance**:
-- [ ] Single-step deployment (push to repo or drag-and-drop)
-- [ ] No build pipelines, environment variables, or configuration files
+- [x] Single-step deployment (push to repo or drag-and-drop)
+- [x] No build pipelines, environment variables, or configuration files
 
 ## Project Structure
 
@@ -99,9 +99,7 @@ images/
 ├── logo.png
 └── assets/               # Other media files
 pages/
-├── about.html
-├── contact.html
-└── [other pages]
+├── index.html            # main and only page that redirects to google
 tests/
 ├── manual/               # Manual testing checklists
 └── validation/           # HTML/CSS validation
@@ -168,18 +166,27 @@ tests/
 
 **Task Generation Strategy**:
 - Load `.specify/templates/tasks-template.md` as base
-- Generate tasks from Phase 1 design docs (contracts, data model, quickstart)
-- Each contract → contract test task [P]
-- Each entity → model creation task [P] 
-- Each user story → integration test task
-- Implementation tasks to make tests pass
+- Generate tasks from Phase 1 design docs (form interface contract, quickstart scenarios)
+- HTML structure creation → single file task
+- CSS styling implementation → parallel with HTML validation
+- JavaScript enhancement → after HTML structure complete
+- Testing scenarios from quickstart.md → manual verification tasks
 
 **Ordering Strategy**:
-- TDD order: Tests before implementation 
-- Dependency order: Models before services before UI
-- Mark [P] for parallel execution (independent files)
+- HTML-first: Semantic structure before styling
+- Progressive enhancement: Basic functionality, then JavaScript enhancement
+- Validation workflow: HTML validation, then accessibility testing
+- Performance optimization: Minification and CDN preparation
+- Deployment readiness: Final Netlify deployment verification
 
-**Estimated Output**: 25-30 numbered, ordered tasks in tasks.md
+**Estimated Output**: 15-20 numbered, ordered tasks in tasks.md
+
+**Static Website Focus**:
+- Single HTML file with inlined CSS/JS
+- Manual testing approach (no automated test framework)
+- Progressive enhancement pattern (works without JS)
+- CDN optimization tasks
+- Accessibility compliance verification
 
 **IMPORTANT**: This phase is executed by the /tasks command, NOT by /plan
 
@@ -203,18 +210,18 @@ tests/
 *This checklist is updated during execution flow*
 
 **Phase Status**:
-- [ ] Phase 0: Research complete (/plan command)
-- [ ] Phase 1: Design complete (/plan command)
-- [ ] Phase 2: Task planning complete (/plan command - describe approach only)
+- [x] Phase 0: Research complete (/plan command)
+- [x] Phase 1: Design complete (/plan command)
+- [x] Phase 2: Task planning complete (/plan command - describe approach only)
 - [ ] Phase 3: Tasks generated (/tasks command)
 - [ ] Phase 4: Implementation complete
 - [ ] Phase 5: Validation passed
 
 **Gate Status**:
-- [ ] Initial Constitution Check: PASS
-- [ ] Post-Design Constitution Check: PASS
-- [ ] All NEEDS CLARIFICATION resolved
-- [ ] Complexity deviations documented
+- [x] Initial Constitution Check: PASS
+- [x] Post-Design Constitution Check: PASS
+- [x] All NEEDS CLARIFICATION resolved
+- [x] Complexity deviations documented (none required)
 
 ---
 *Based on Constitution v2.1.1 - See `/memory/constitution.md`*

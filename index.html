@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Search Google without AI-generated summaries by automatically adding -ai to your queries">
+    <meta name="theme-color" content="#ffffff">
+    <title>No Google No AI - Search Without AI Summaries</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            text-align: center;
+            padding: 2rem 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        header p {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1rem;
+        }
+
+        .visually-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* Form styling */
+        #search-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        #search-input {
+            padding: 1rem;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            width: 100%;
+        }
+
+        #search-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        button[type="submit"] {
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.3s ease;
+        }
+
+        button[type="submit"]:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        button[type="submit"]:active {
+            transform: translateY(0);
+        }
+
+        .help-text {
+            font-size: 0.9rem;
+            color: #666;
+            text-align: center;
+            margin-top: 0.5rem;
+        }
+
+        footer {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 1rem;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Mobile-first responsive design */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+
+            header {
+                padding: 1.5rem 1rem;
+            }
+
+            main {
+                padding: 1rem;
+            }
+
+            #search-form {
+                padding: 1.5rem;
+            }
+
+            .form-group {
+                gap: 0.75rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.75rem;
+            }
+
+            header p {
+                font-size: 1rem;
+            }
+
+            #search-form {
+                padding: 1rem;
+            }
+
+            button[type="submit"] {
+                padding: 0.75rem 1.5rem;
+            }
+        }
+
+        /* High contrast and accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        @media (prefers-contrast: high) {
+            body {
+                background: #000;
+                color: #fff;
+            }
+
+            #search-form {
+                background: #333;
+                color: #fff;
+            }
+
+            #search-input {
+                background: #222;
+                color: #fff;
+                border-color: #666;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>No Google No AI</h1>
+        <p>Search Google without AI-generated summaries</p>
+    </header>
+
+    <main>
+        <section>
+            <form id="search-form" action="https://www.google.com/search" method="GET" role="search" aria-label="Search Google without AI summaries">
+                <div class="form-group">
+                    <label for="search-input" class="visually-hidden">Search Query</label>
+                    <input
+                        type="text"
+                        name="q"
+                        id="search-input"
+                        placeholder="Search Google..."
+                        aria-label="Enter your search query"
+                        aria-describedby="search-help"
+                        autocomplete="off"
+                        autofocus
+                        required
+                    />
+                    <button type="submit" aria-label="Submit search query">Search</button>
+                </div>
+                <p id="search-help" class="help-text">We'll automatically add "-ai" to exclude AI-generated summaries</p>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>Simply search and we'll add "-ai" to your query to skip AI overviews</p>
+    </footer>
+
+    <script>
+        /**
+         * Process search query and redirect to Google with "-ai" suffix
+         * @param {string} query - User's search query string
+         * @returns {void} - Side effect: updates browser location
+         */
+        function processAndRedirect(query) {
+            try {
+                // Input validation and sanitization
+                const trimmedQuery = String(query || '').trim();
+
+                // Handle extremely long queries (browser URL limit ~2000 chars)
+                const maxQueryLength = 1900; // Leave room for Google URL structure
+                const truncatedQuery = trimmedQuery.length > maxQueryLength
+                    ? trimmedQuery.substring(0, maxQueryLength)
+                    : trimmedQuery;
+
+                // Check if query already contains "-ai" to prevent duplication
+                // More robust regex to catch various "-ai" patterns
+                const hasAISuffix = /[\s\-]ai\b/i.test(truncatedQuery);
+
+                // Add "-ai" suffix if not already present
+                let processedQuery;
+                if (truncatedQuery === '') {
+                    // Handle empty query case
+                    processedQuery = '-ai';
+                } else if (hasAISuffix) {
+                    processedQuery = truncatedQuery;
+                } else {
+                    processedQuery = `${truncatedQuery} -ai`;
+                }
+
+                // URL encode the query with error handling
+                let encodedQuery;
+                try {
+                    encodedQuery = encodeURIComponent(processedQuery);
+                } catch (encodingError) {
+                    console.warn('URL encoding failed, using fallback:', encodingError);
+                    // Fallback: remove potentially problematic characters
+                    const sanitized = processedQuery.replace(/[^\w\s\-]/g, ' ');
+                    encodedQuery = encodeURIComponent(sanitized);
+                }
+
+                // Construct Google search URL
+                const googleURL = `https://www.google.com/search?q=${encodedQuery}`;
+
+                // Final validation: check URL length
+                if (googleURL.length > 2000) {
+                    console.warn('URL too long, truncating query');
+                    const shortQuery = processedQuery.substring(0, 100) + ' -ai';
+                    const shortEncodedQuery = encodeURIComponent(shortQuery);
+                    window.location.href = `https://www.google.com/search?q=${shortEncodedQuery}`;
+                } else {
+                    // Redirect to Google
+                    window.location.href = googleURL;
+                }
+
+            } catch (error) {
+                console.error('Error processing search query:', error);
+                // Fallback: redirect to Google homepage
+                window.location.href = 'https://www.google.com/search?q=-ai';
+            }
+        }
+
+        /**
+         * Initialize form handler when DOM is ready
+         */
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchForm = document.getElementById('search-form');
+            const searchInput = document.getElementById('search-input');
+
+            if (searchForm && searchInput) {
+                // Add form submission handler
+                searchForm.addEventListener('submit', function(event) {
+                    event.preventDefault(); // Prevent default form submission
+
+                    const query = searchInput.value;
+                    processAndRedirect(query);
+                });
+
+                // Optional: Add Enter key handler for better UX
+                searchInput.addEventListener('keydown', function(event) {
+                    if (event.key === 'Enter') {
+                        event.preventDefault();
+                        const query = searchInput.value;
+                        processAndRedirect(query);
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

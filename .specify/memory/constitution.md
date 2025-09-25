@@ -1,50 +1,67 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+Sync Impact Report:
+Version change: Initial → 1.0.0
+Added principles: Static-First, CDN-Ready, Minimal Dependencies, Performance-First, Simple Deployment
+Added sections: Development Workflow
+Templates requiring updates: ✅ All templates validated for consistency
+Follow-up TODOs: None
+-->
+
+# No-Google-No-AI Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Static-First
+Static files only - no server-side processing, databases, or dynamic content generation. HTML, CSS, JavaScript, and assets must be servable directly from a CDN. All content must be pre-built and self-contained.
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+**Rationale**: Eliminates complexity, reduces attack surface, ensures maximum compatibility with CDN deployment.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### II. CDN-Ready
+All paths must be relative or absolute, no localhost dependencies, and all assets must be optimized for CDN delivery (minified CSS/JS, compressed images, proper caching headers via meta tags).
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+**Rationale**: Ensures seamless deployment to Netlify, GitHub Pages, or any static hosting provider.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### III. Minimal Dependencies
+Prefer vanilla HTML/CSS/JS over frameworks. When libraries are necessary, use CDN-hosted versions or single-file includes. No build tools unless absolutely required for basic optimization.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+**Rationale**: Reduces bundle size, eliminates build complexity, improves maintainability.
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+### IV. Performance-First
+Pages must load in under 2 seconds on 3G. Images optimized, CSS/JS minified, minimal HTTP requests. No unnecessary animations or heavy libraries.
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+**Rationale**: Ensures good user experience across all connection speeds and devices.
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+### V. Simple Deployment
+Deployment must be a single step: push to repository or drag-and-drop to CDN. No build pipelines, environment variables, or configuration files required.
+
+**Rationale**: Reduces deployment friction and maintenance overhead.
+
+## Development Workflow
+
+### File Organization
+- `index.html` at root for homepage
+- `css/` for stylesheets
+- `js/` for JavaScript
+- `images/` for media assets
+- `pages/` for additional HTML pages
+
+### Quality Gates
+- All HTML must validate via W3C validator
+- CSS must be browser-compatible (no experimental features)
+- JavaScript must work without transpilation
+- All links must be functional and relative
+- Images must be optimized (<100KB each)
+
+### Testing Requirements
+- Manual testing in Chrome, Firefox, Safari
+- Mobile responsiveness verification
+- Load time testing on slow connections
+- All forms and interactions must work with JavaScript disabled
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+This constitution supersedes all other development practices. Any deviation from static-first principles must be explicitly justified and documented. Changes to this constitution require updating all dependent templates and documentation.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+All code reviews must verify constitutional compliance. Complexity additions require clear justification showing simpler alternatives were insufficient.
+
+**Version**: 1.0.0 | **Ratified**: 2025-09-25 | **Last Amended**: 2025-09-25
